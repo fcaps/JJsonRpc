@@ -1,15 +1,17 @@
-apply plugin: 'java'
-apply plugin: 'idea'
+plugins {
+  id('java-library')
+  id('idea')
+}
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 version = '1.0'
 
 idea {
   project {
-    jdkName = JavaVersion.VERSION_1_8
-    languageLevel = JavaVersion.VERSION_1_8
+    jdkName = JavaVersion.VERSION_17
+    languageLevel = JavaVersion.VERSION_17
     vcs = 'Git'
   }
   module {
