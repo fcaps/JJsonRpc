@@ -1,11 +1,11 @@
 package com.nbarraille.jjsonrpc;
 
+import org.slf4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A TCP Server that creates a SocketListener in another thread. This socket listener will automatically create JJsonPeers
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  */
 public class TcpServer {
-	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final static Logger _log = org.slf4j.LoggerFactory.getLogger(TcpServer.class);
 	private final SocketListener _listener;
 	private final ArrayList<JJsonPeer> _peers;
 	private final CompletableFuture<JJsonPeer> firstPeer = new CompletableFuture<>();
@@ -34,7 +34,7 @@ public class TcpServer {
 	 */
 	public void start() {
 		_listener.start();
-		_log.log(Level.INFO, "TCP Server started.");
+		_log.info("TCP Server started.");
 	}
 
 	public void stop() {

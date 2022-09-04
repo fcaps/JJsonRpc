@@ -1,10 +1,10 @@
 package com.nbarraille.jjsonrpc;
 
+import org.slf4j.Logger;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This is a basic TCP Client, that creates a JJsonPeer.
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  */
 public class TcpClient {
-	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final static Logger _log = org.slf4j.LoggerFactory.getLogger(TcpClient.class);
 	private final JJsonPeer _peer; // The JJson Peer
 	
 	/**
@@ -25,7 +25,7 @@ public class TcpClient {
 	 */
 	public TcpClient(String serverAddress, int serverListenerPort, Object handler) throws IOException {
 		_peer = new JJsonPeer(new Socket(serverAddress, serverListenerPort), handler);
-		_log.log(Level.INFO, "TCP Client started");
+		_log.info("TCP Client started");
 		_peer.start();
 	}
 	

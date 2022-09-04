@@ -1,13 +1,13 @@
 package com.nbarraille.jjsonrpc;
 
+import org.slf4j.Logger;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SocketListener extends Thread {
-	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final static Logger _log = org.slf4j.LoggerFactory.getLogger(SocketListener.class);
 	
 	private final int _port;
 	private final TcpServer _server;
@@ -26,7 +26,7 @@ public class SocketListener extends Thread {
 		try {
 			_socket = new ServerSocket(_port);
 		} catch (IOException e1) {
-			_log.log(Level.SEVERE, "Could not start RPC server.");
+			_log.error("Could not start RPC server.");
 		}
 
 		running = true;
@@ -35,7 +35,7 @@ public class SocketListener extends Thread {
 			try {
 				Socket connected = _socket.accept();
 				JJsonPeer jp = new JJsonPeer(connected, _handler);
-				_log.log(Level.INFO, "New client connected on port " + connected.getPort());
+				_log.info("New client connected on port " + connected.getPort());
 				_server.addPeer(jp);
 				jp.start();
 				
@@ -51,7 +51,7 @@ public class SocketListener extends Thread {
 		try {
 			_socket.close();
 		} catch(IOException e) {
-			_log.log(Level.SEVERE, "Could not close RPC server socket.", e);
+			_log.error("Could not close RPC server socket.", e);
 		}
 	}
 
