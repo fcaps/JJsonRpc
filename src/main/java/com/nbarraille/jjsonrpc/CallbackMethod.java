@@ -32,11 +32,8 @@ public class CallbackMethod {
 		if(method.getExceptionTypes().length > 0)
 			throw new InvalidMethodException("The callback method cannot throw exceptions");
 		
-		if(Modifier.isStatic(method.getModifiers()) && instance != null)
-			throw new InvalidMethodException("You cannot provide a static method and a non null instance");
-		
-		if(!Modifier.isStatic(method.getModifiers()) && instance == null)
-			throw new InvalidMethodException("You cannot provide a non static method and a null instance");
+		if(Modifier.isStatic(method.getModifiers()))
+			throw new InvalidMethodException("You cannot provide a static method");
 		
 		if(method.getParameterTypes()[method.getParameterTypes().length - 1] != Object.class)
 			throw new InvalidMethodException("The callback method last parameter must be an Object");
