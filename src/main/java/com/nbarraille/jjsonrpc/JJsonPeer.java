@@ -267,7 +267,7 @@ public class JJsonPeer extends Thread {
      */
     private void processRequest(JSONRPC2Request req) {
         String method = req.getMethod();
-        Object argsObj = req.getParams();
+        List<Object> argsList = req.getPositionalParams();
         Object idObj = req.getID();
         long id = 0;
         try {
@@ -281,12 +281,10 @@ public class JJsonPeer extends Thread {
 
         Object[] params = null;
         Class<?>[] paramsTypes = null;
-        if (argsObj == null) { // Support for null params
+        if (argsList == null) { // Support for null params
             params = new Object[0];
             paramsTypes = new Class<?>[0];
-        } else if (argsObj instanceof List) {
-            @SuppressWarnings("unchecked")
-            List<Object> argsList = (List<Object>) argsObj;
+        } else {
             params = new Object[argsList.size()];
             paramsTypes = new Class<?>[argsList.size()];
             int i = 0;
@@ -294,11 +292,6 @@ public class JJsonPeer extends Thread {
                 params[i] = o;
                 paramsTypes[i++] = o.getClass();
             }
-        } else {
-            // Wrong request, sending error
-            _log.info("Invalid Request: Cannot retrieve List params");
-            sendErrorResponse(ERROR_CODE_INVALID_REQUEST, "Invalid Request", id);
-            return;
         }
 
         // Locating and executing the method statically
@@ -343,17 +336,15 @@ public class JJsonPeer extends Thread {
      */
     private void processNotification(JSONRPC2Notification not) {
         String method = not.getMethod();
-        Object argsObj = not.getParams();
+        List<Object> argsList = not.getPositionalParams();
 
         Object[] params = null;
         Class<?>[] paramsTypes = null;
-        if (argsObj == null) {
+        if (argsList == null) {
             // Support for null params
             params = new Object[0];
             paramsTypes = new Class<?>[0];
-        } else if (argsObj instanceof List) {
-            @SuppressWarnings("unchecked")
-            List<Object> argsList = (List<Object>) argsObj;
+        } else {
             params = new Object[argsList.size()];
             paramsTypes = new Class<?>[argsList.size()];
             int i = 0;
@@ -361,10 +352,6 @@ public class JJsonPeer extends Thread {
                 params[i] = o;
                 paramsTypes[i++] = o.getClass();
             }
-        } else {
-            // Wrong request, ignoring
-            _log.info("Invalid Request: Cannot retrieve List params");
-            return;
         }
 
         // Locating and executing the method statically
