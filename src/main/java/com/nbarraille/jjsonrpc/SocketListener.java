@@ -7,12 +7,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SocketListener extends Thread {
-	private Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
 	
-	private int _port;
+	private final int _port;
+	private final TcpServer _server;
+	private final Object _handler;
 	private ServerSocket _socket;
-	private TcpServer _server;
-	private Object _handler;
 	private boolean running = false;
 	
 	public SocketListener(int port, TcpServer server, Object handler) {

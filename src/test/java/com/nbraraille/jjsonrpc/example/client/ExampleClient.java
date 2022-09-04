@@ -22,7 +22,7 @@ public class ExampleClient {
 			a.add(1.4);
 			a.add(2.0);
 			Thread.sleep(1000);
-			System.out.println("The result of the multiplication is " + (Double) peer.sendSyncRequest("multiply", a, true));
+			System.out.println("The result of the multiplication is " + peer.sendSyncRequest("multiply", a, true));
 			Thread.sleep(1000);
 			List<Object> b = new ArrayList<Object>();
 			b.add(987);
@@ -45,9 +45,7 @@ public class ExampleClient {
 			} catch(InvalidMethodException e) {
 				e.printStackTrace();
 			}
-			
-			return;
-			
+
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -15,8 +15,8 @@ package com.nbarraille.jjsonrpc;
  *
  */
 public abstract class PendingRequest {
-	private long _id; // The ID of the request
-	private long _time; // The time at which the request was made (for cleanup purposes)
+	private final long _id; // The ID of the request
+	private final long _time; // The time at which the request was made (for cleanup purposes)
 
 	protected PendingRequest(long id) {
 		_id = id;

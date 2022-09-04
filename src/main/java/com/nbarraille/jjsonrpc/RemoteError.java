@@ -7,9 +7,9 @@ package com.nbarraille.jjsonrpc;
  *
  */
 public class RemoteError {
-	private int _code; // The code of the error.
-	private String _message; // The message of the error
-	private Object _data; // Some additional data about this error.
+	private final int _code; // The code of the error.
+	private final String _message; // The message of the error
+	private final Object _data; // Some additional data about this error.
 	
 	/**
 	 * Creates a Remote Error with the code, the message and the data.

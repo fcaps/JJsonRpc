@@ -48,14 +48,14 @@ public class JJsonPeer extends Thread {
 	private final static long MAX_PENDING_REQUESTS = 100;
 
 
-	private Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
 	private Map<String, Set<Method>> _methodsCache;
-	private List<PendingRequest> _pendingRequests;
+	private final List<PendingRequest> _pendingRequests;
 
-	private Socket _socket; // The socket used by the peer to communicate.
-	private InputStream _in; // The InputStream of the socket.
-	private PrintWriter _out; // The OutputStream of the socket.
-	private Object _handler;
+	private final Socket _socket; // The socket used by the peer to communicate.
+	private final InputStream _in; // The InputStream of the socket.
+	private final PrintWriter _out; // The OutputStream of the socket.
+	private final Object _handler;
 
 	private Optional<Runnable> connectionLossCallback = Optional.empty();
 
@@ -252,7 +252,6 @@ public class JJsonPeer extends Thread {
 					sendErrorResponse(ERROR_CODE_PARSE_ERROR, "Parse Error");
 				}
 			}
-			return;
 		}
 	}
 
@@ -376,18 +375,14 @@ public class JJsonPeer extends Thread {
 		} catch (SecurityException e) {
 			// A Security Manager prevented the access to this method
 			_log.log(Level.INFO, "A Security Manager prevented the access to this method");
-			return;
 		} catch (IllegalArgumentException e) {
 			// The method was called with the wrong number/types of arguments, SHOULDNT HAPPEN
 			e.printStackTrace();
-			return;
 		} catch (IllegalAccessException e) {
 			// Java Language Access prevented the invocation of this method
 			_log.log(Level.INFO, "Java Language Access prevented the invocation of this method");
-			return;
 		} catch (InvocationTargetException e) {
 			// The method has thrown an exception
-			return;
 		}
 	}
 

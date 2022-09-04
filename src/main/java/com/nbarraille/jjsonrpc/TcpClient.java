@@ -12,8 +12,8 @@ import java.util.logging.Logger;
  *
  */
 public class TcpClient {
-	private Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
-	private JJsonPeer _peer; // The JJson Peer
+	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final JJsonPeer _peer; // The JJson Peer
 	
 	/**
 	 * Creates a new TCP Socket by connecting to a SocketServer, and creates a JJsonPeer that will use this socket to communicate.

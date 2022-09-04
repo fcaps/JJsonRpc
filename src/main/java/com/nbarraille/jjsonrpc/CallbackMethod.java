@@ -11,9 +11,9 @@ import java.util.Arrays;
  *
  */
 public class CallbackMethod {
-	private Method _method; // The method to call back.
-	private Object _instance; // The instance of the object to call the method on.
-	private Object[] _params; // The parameters to call the method with (just have to add the response at the end)
+	private final Method _method; // The method to call back.
+	private final Object _instance; // The instance of the object to call the method on.
+	private final Object[] _params; // The parameters to call the method with (just have to add the response at the end)
 	
 	
 	/**

@@ -8,16 +8,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A TCP Server that creates a SocketListener in an other thread. This socket listener will automatically create JJsonPeers 
+ * A TCP Server that creates a SocketListener in another thread. This socket listener will automatically create JJsonPeers
  * on any socket that it opens. The TCP Server offers access to all these peers.
  * @author nbarraille
  *
  */
 public class TcpServer {
-	private Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
-	private SocketListener _listener;
-	private ArrayList<JJsonPeer> _peers;
-	private CompletableFuture<JJsonPeer> firstPeer = new CompletableFuture<>();
+	private final Logger _log = Logger.getLogger(this.getClass().getCanonicalName()); // The logger object.
+	private final SocketListener _listener;
+	private final ArrayList<JJsonPeer> _peers;
+	private final CompletableFuture<JJsonPeer> firstPeer = new CompletableFuture<>();
 	
 	/**
 	 * Creates a new Server that will listen for connections on the given port.
@@ -29,7 +29,7 @@ public class TcpServer {
 	}
 	
 	/**
-	 * Starts the Server: Starts the listener in an other thread.
+	 * Starts the Server: Starts the listener in another thread.
 	 * This method does not block the current thread.
 	 */
 	public void start() {
