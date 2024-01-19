@@ -299,6 +299,7 @@ public class JJsonPeer extends Thread {
         try {
             Method m = getCompatibleMethods(method, params);
             if (m == null) {
+                _log.info("Method Not Found {}", method);
                 // Called wrong method, sending Error Response
                 sendErrorResponse(ERROR_CODE_METHOD_NOT_FOUND, "Method Not Found", id);
                 return;
